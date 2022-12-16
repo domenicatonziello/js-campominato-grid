@@ -8,7 +8,10 @@ Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed 
 // *FUNZIONI -------------------------------------------------------------
 // creo funzione per generare celle
 function createCell(number){
-    return `<div class="cell"> ${number} </div>`;
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.append(number);
+    return cell;
 }
 
 
@@ -32,24 +35,16 @@ const totalCells = rows * cols;
 button.addEventListener('click', function(){
     // rimuovo nodo
     container.removeChild(h2);
-    // genero griglia al click
-    grid.classList.remove('d-none');
-    grid.classList.add('d-block');
-
-    // aggiungo celle
-    let cell= '';
+    // genero griglia al click aggiungendo le celle
     for(let i = 1 ; i <= totalCells; i++){
-        cell += createCell(i);
+        const cell = createCell(i);
         
         cell.addEventListener('click', function(){
-            cell.classList.add('clicked');
+            cell.classList.toggle('clicked');
             console.log('cella n:' + i);
         });
+        grid.appendChild(cell);
     }
-    grid.innerHTML = cell;
-
-
     
-
-
+    
 });

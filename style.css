@@ -61,7 +61,6 @@ main h2{
     width: 600px;
     height: 600px;
     margin: 0 auto;
-    /* border: 2px dashed black; */
 
     display: flex;
     flex-wrap: wrap;

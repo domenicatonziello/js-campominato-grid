@@ -34,17 +34,18 @@ const totalCells = rows * cols;
 // aggiungo event listener al button
 button.addEventListener('click', function(){
     // rimuovo nodo
-    container.removeChild(h2);
-    // genero griglia al click aggiungendo le celle
-    for(let i = 1 ; i <= totalCells; i++){
-        const cell = createCell(i);
-        
-        cell.addEventListener('click', function(){
-            cell.classList.toggle('clicked');
-            console.log('cella n:' + i);
-        });
-        grid.appendChild(cell);
-    }
-    
-    
+    if (h2){
+        container.removeChild(h2);
+        // genero griglia al click aggiungendo le celle
+        for(let i = 1 ; i <= totalCells; i++){
+            const cell = createCell(i);
+            
+            cell.addEventListener('click', function(){
+                cell.classList.toggle('clicked');
+                console.log('cella n:' + i);
+            });
+            
+            grid.appendChild(cell);
+        }
+    }  
 });

@@ -21,31 +21,51 @@ function createCell(number){
 const button = document.querySelector('.btn');
 const container = document.querySelector('.container');
 const h2 = document.querySelector('h2');
-const grid = document.querySelector('.grid');
+const select = document.getElementById('difficulty');
 
-
+// preparo griglia
+const grid = document.createElement('div');
+grid.classList.add('grid');
 
 // * EVENTI --------------------------------------------------------------
-const rows = 10;
-const cols = 10;
-const totalCells = rows * cols; 
-
 
 // aggiungo event listener al button
 button.addEventListener('click', function(){
-    // rimuovo nodo
-    if (h2){
+    // prendo userchoise
+    const userChoise = select.value;
+    let rows = 10;
+    let cols = 10;
+    if(userChoise === 'medium'){
+        rows = 9;
+        cols = 9;
+    } else if (userChoise === 'hard') {
+        rows = 7;
+        cols = 7;
+    }
+    const totalCells = rows * cols; 
+    // rimuovo nodo  
+    if (container.contains(h2)){
         container.removeChild(h2);
+        container.appendChild(grid);
         // genero griglia al click aggiungendo le celle
         for(let i = 1 ; i <= totalCells; i++){
             const cell = createCell(i);
-            
-            cell.addEventListener('click', function(){
+           
+           if(userChoise === 'hard'){
+               cell.classList.add('hard');
+            } else if (userChoise === 'medium'){
+               cell.classList.add('medium');
+            }else{
+               cell.classList.add('easy')
+            }
+
+            cell.addEventListener('click', function(){ 
                 cell.classList.toggle('clicked');
                 console.log('cella n:' + i);
             });
-            
+           
             grid.appendChild(cell);
         }
-    }  
+        
+    }
 });
